@@ -121,4 +121,4 @@ sudo systemctl status kafdrop
 sudo systemctl enable kafdrop
 ```
 ### Open kafdrop gui
-<your-ip>:9000
+localhost:9000
