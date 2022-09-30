@@ -91,7 +91,7 @@ sudo mkdir /opt/kafdrop && cd /opt/kafdrop/
 curl -LO https://github.com/obsidiandynamics/kafdrop/releases/download/3.30.0/kafdrop-3.30.0.jar
 ```
 
-### Set kafdrop as a services
+### Set kafdrop as a services (OPTIONAL)
 ```
 sudo nano /etc/systemd/system/kafdrop.service
 ```
@@ -120,12 +120,3 @@ sudo systemctl start kafdrop
 sudo systemctl status kafdrop
 sudo systemctl enable kafdrop
 ```
-
-
-
-
-
-
-
-
-
