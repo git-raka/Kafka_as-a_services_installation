@@ -1,4 +1,4 @@
-# Kafka without confluent
+# Kafka without confluent ad optional Kafdrop
 
 ### Create directory for kafka and download kafka.tar
 ```
@@ -84,6 +84,44 @@ sudo systemctl start kafka
 sudo systemctl status kafka
 ```
 <img width="760" alt="image" src="https://user-images.githubusercontent.com/77326619/193203978-9bbb7b2b-85e5-472b-800d-e1886cd1a32b.png">
+
+# Set up Kafdrop for gui kafka
+```
+sudo mkdir /opt/kafdrop && cd /opt/kafdrop/ 
+curl -LO https://github.com/obsidiandynamics/kafdrop/releases/download/3.30.0/kafdrop-3.30.0.jar
+```
+
+### Set kafdrop as a services
+```
+sudo nano /etc/systemd/system/kafdrop.service
+```
+and add append this 
+```
+[Unit]
+Description=Kafdrop server
+Documentation=https://github.com/obsidiandynamics/kafdrop
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+ExecStart=/bin/java --add-opens=java.base/sun.nio.ch=ALL-UNNAMED \
+    -jar /opt/kafdrop/kafdrop.jar \
+    --kafka.brokerConnect=localhost:9092
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
+```
+### After that start a services
+```
+sudo systemctl daemon-reload
+sudo systemctl start kafdrop
+sudo systemctl status kafdrop
+sudo systemctl enable kafdrop
+```
+
+
 
 
 
