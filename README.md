@@ -1,4 +1,4 @@
-# Kafka without confluent ad optional Kafdrop
+# Kafka without confluent and add optional monitoring Kafdrop
 
 ### Create directory for kafka and download kafka.tar
 ```
@@ -29,23 +29,8 @@ delete.topic.enable = true
 ```
 sudo nano /etc/systemd/system/zookeeper.service
 ```
-append this
-```
-[Unit]
-Requires=network.target remote-fs.target
-After=network.target remote-fs.target
-
-[Service]
-Type=simple
-User=ddi
-ExecStart=/home/ddi/kafka/bin/zookeeper-server-start.sh /home/ddi/kafka/config/zookeeper.properties
-ExecStop=/home/ddi/kafka/bin/zookeeper-server-stop.sh
-Restart=on-abnormal
-
-[Install]
-WantedBy=multi-user.target
-```
-<img width="599" alt="image" src="https://user-images.githubusercontent.com/77326619/193204258-ac0be9e1-bb6f-4a35-9526-a319a425fa8c.png">
+append this :
+https://github.com/git-raka/Kafka_as-a_services_installation/blob/d9faf988b84ef262317b828eb56b76831648ccf1/zookeeper.service#L1-L13
 
 
 
@@ -53,28 +38,22 @@ WantedBy=multi-user.target
 ```
 sudo nano /etc/systemd/system/kafka.service
 ```
-append this 
+append this :
+https://github.com/git-raka/Kafka_as-a_services_installation/blob/d9faf988b84ef262317b828eb56b76831648ccf1/kafka.service#L1-L13
+
+### <Optional> Create Kafka connect run as a service
 ```
-[Unit]
-Requires=zookeeper.service
-After=zookeeper.service
-
-[Service]
-Type=simple
-User=ddi
-ExecStart=/bin/sh -c '/home/ddi/kafka/bin/kafka-server-start.sh /home/ddi/kafka/config/server.properties > /home/ddi/kafka/logs/kafka.log 2>&1'
-ExecStop=/home/ddi/kafka/bin/kafka-server-stop.sh
-Restart=on-abnormal
-
-[Install]
-WantedBy=multi-user.target
+sudo nano /etc/systemd/system/kafka_connect.service
 ```
-<img width="764" alt="image" src="https://user-images.githubusercontent.com/77326619/193204450-c7f70378-b50d-4569-9849-3b88b16e322e.png">
+append this : 
+https://github.com/git-raka/Kafka_as-a_services_installation/blob/d9faf988b84ef262317b828eb56b76831648ccf1/kafka_connect.service#L1-L12
 
 
-### Start kafka services
+
+### Start kafka services and kafka connect
 ```
 sudo systemctl start kafka
+sudo systemctl status kafka_connect
 ```
 <img width="397" alt="image" src="https://user-images.githubusercontent.com/77326619/193204073-f9ea072e-ce1e-48cc-94a7-ae7d5153b534.png">
 
