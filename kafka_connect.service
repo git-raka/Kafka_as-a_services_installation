@@ -1,0 +1,12 @@
+[Unit]
+Requires=kafka.service
+After=kafka.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/sh -c '/root/kafka/bin/connect-distributed.sh /root/kafka/config/testing.properties > /root/kafka/logs/kafka_connect.log 2>&1'
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
