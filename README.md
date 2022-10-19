@@ -5,7 +5,7 @@
 mkdir kafka && cd kafka && wget https://downloads.apache.org/kafka/3.2.3/kafka_2.12-3.2.3.tgz
 ```
 
-### Extract kafka.tar
+### Extract kafka.tar.gz
 ```
 tar -xvf kafka_2.12-3.2.3.tgz && cd kafka_2.12-3.2.3 && mv * ../../kafka/ && cd ../../kafka/ && mkdir logs
 ```
@@ -13,8 +13,6 @@ tar -xvf kafka_2.12-3.2.3.tgz && cd kafka_2.12-3.2.3 && mv * ../../kafka/ && cd 
 ```
 nano ~/kafka/config/server.properties
 ```
-<img width="760" alt="image" src="https://user-images.githubusercontent.com/77326619/193204183-e8babf70-a7c6-41b9-b967-4b6374aec22a.png">
-
 
 change the logs dir to : 
 ```
