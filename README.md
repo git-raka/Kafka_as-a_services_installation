@@ -39,9 +39,42 @@ sudo nano /etc/systemd/system/kafka.service
 append this :
 https://github.com/git-raka/Kafka_as-a_services_installation/blob/d9faf988b84ef262317b828eb56b76831648ccf1/kafka.service#L1-L13
 
-### <Optional> Create Kafka connect run as a service
+# SETUP KAFKA CONNECT and  Create Kafka connect run as a service
+### Set up kafka connect 
 ```
-sudo nano /etc/systemd/system/kafka_connect.service
+mkdir /home/kafka/connect
+```
+
+### Download plugin connector
+this plugin connect is from [conker84](https://github.com/neo4j-contrib/neo4j-streams/releases) thanks to creating this awesome plugin
+```
+wget https://github.com/neo4j-contrib/neo4j-streams/releases/download/4.1.2/neo4j-kafka-connect-neo4j-2.0.2-kc-oss.zip 
+unzip neo4j-kafka-connect-neo4j-2.0.2-kc-oss.zip
+```
+
+### Download Debezium Connector
+```
+cd /home/kafka/connect 
+wget https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.6.Final/debezium-connector-postgres-1.9.6.Final-plugin.tar.gz
+```
+
+### Set up connect configuration
+a properties file you can find in <kafka_home>/config
+```
+cp connect-distributed.properties connect.properties
+```
+edit stream.properties file, and append this row to connect directory
+
+```
+vi /home/kafka/config/stream.properties
+```
+and append this row to connect directory
+```
+plugin.path=/home/raka/kafka/connect
+```
+
+```
+sudo nano /etc/systemd/system/connect.service
 ```
 append this : 
 https://github.com/git-raka/Kafka_as-a_services_installation/blob/d9faf988b84ef262317b828eb56b76831648ccf1/kafka_connect.service#L1-L12
@@ -99,3 +132,6 @@ sudo systemctl enable kafdrop
 ```
 ### Open kafdrop gui
 localhost:9000
+
+
+
