@@ -23,7 +23,15 @@ and append this to EOF
 delete.topic.enable = true
 ```
 
-### Create zookerper run as a services 
+### Create kafka run in background linux
+```
+sudo nano /etc/systemd/system/kafka.service
+```
+append this :
+https://github.com/git-raka/Kafka_as-a_services_installation/blob/d9faf988b84ef262317b828eb56b76831648ccf1/kafka.service#L1-L13
+
+
+### Create zookerper run in background linux 
 ```
 sudo nano /etc/systemd/system/zookeeper.service
 ```
@@ -43,6 +51,7 @@ https://github.com/git-raka/Kafka_as-a_services_installation/blob/d9faf988b84ef2
 ### Set up kafka connect 
 ```
 mkdir /home/kafka/connect
+cd /home/kafka/connect
 ```
 
 ### Download plugin connector
